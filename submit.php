@@ -1,40 +1,22 @@
 <?php
-$formType = $_POST['formType'];
-    
-// // Availability
-// // if($_POST['availRating'] != 50) {
-//     $availRating = $_POST["availRating"];
-//     $availComment = $_POST["availComment"];
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-//     echo $availRating;
-//     // Process Data
-// // }
+    $combinedFormData = $_POST;
 
-// // Fit For Purpose
-// if($_POST['fitRating'] != "50") {
-//     $fitRating = $_POST["fitRating"];
-//     $fitComment = $_POST["fitComment"];
+    // Unpacking the array into variables
+    $availRating = $combinedFormData[0];
+    $availComent = $combinedFormData[1];
+    $fitRating = $combinedFormData[2];
+    $fitComment = $combinedFormData[3];
+    $aesthRating = $combinedFormData[4];
+    $aesthComment = $combinedFormData[5];
+    $qualRating = $combinedFormData[6];
+    $qualComment = $combinedFormData[7];
 
-//     // Process Data
-// }
-
-// // Aesthetic Rating
-// if($_POST['aesthRating'] != "50") {
-//     $aesthRating = $_POST["aesthRating"];
-//     $aesthComment = $_POST["aesthComment"];
-
-//     echo $aesthRating;
-//     // Process Data
-// }
-
-// Quality Rating
-if($formType === 'qualForm') {
-    // $qualRating = $_POST["qualRating"];
-    // $qualComment = $_POST["qualComment"];
-
-    echo $qualRating;
-
-    // Process Data
+    // $i = 0;
+    // foreach($combinedFormData as $data) {
+    //     echo $i . ": " . $data . "\n";
+    //     $i++;
+    // }
 }
-
 ?>

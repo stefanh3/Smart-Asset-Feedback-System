@@ -39,8 +39,10 @@
         <div class="col-lg-6" style="background-color:#8cc63f">
             <h1 class="box">Availability</h1>
             <p class="box">Can you access this facility when and how you wish?</p>
-            <form id="availForm" action="availSubmit.php" method="POST">
+            <!-- <form id="availForm" action="availSubmit.php" method="POST"> -->
+            <form id="availForm" method="POST">
                 <div class="rating form-group">
+                    <input type="hidden" name="availRating" value="-1">
                     <input type="radio" name="availRating" id="availStar1" value="1">
                     <label for="availStar1"></label>
                     <input type="radio" name="availRating" id="availStar2" value="2">
@@ -64,8 +66,10 @@
         <div class="col-lg-6" style="background-color:#2d3691">
             <h1 class="box">Fit For Purpose</h1>
             <p class="box">Is the facility capable of meeting your needs of it?</p>
-            <form id="fitForm" action="fitSubmit.php" method="POST">
+            <!-- <form id="fitForm" action="fitSubmit.php" method="POST"> -->
+            <form id="fitForm" method="POST">
                 <div class="rating form-group">
+                    <input type="hidden" name="fitRating" value="-1">
                     <input type="radio" name="fitRating" id="fitStar1" value="1">
                     <label for="fitStar1"></label>
                     <input type="radio" name="fitRating" id="fitStar2" value="2">
@@ -90,8 +94,10 @@
         <div class="col-lg-6" style="background-color: #c41230;">
             <h1 class="box">Aesthetics</h1>
             <p class="box">Does the facility look overall visually pleasing to the eye?</p>
-            <form id="aesthForm" action="aesthSubmit.php" method="POST">
+            <!-- <form id="aesthForm" action="aesthSubmit.php" method="POST"> -->
+            <form id="aesthForm" method="POST">
                 <div class="rating form-group">
+                    <input type="hidden" name="aesthRating" value="-1">
                     <input type="radio" name="aesthRating" id="aesthStar1" value="1">
                     <label for="aesthStar1"></label>
                     <input type="radio" name="aesthRating" id="aesthStar2" value="2">
@@ -113,8 +119,10 @@
         <div class="col-lg-6" style="background-color: #f4911e;">
             <h1 class="box">Quality</h1>
             <p class="box">How well does the facility compare to others?</p>
-            <form id="qualForm" action="qualSubmit.php" method="POST">
+            <!-- <form id="qualForm" action="qualSubmit.php" method="POST"> -->
+            <form id="qualForm" method="POST">
                 <div class="rating form-group">
+                    <input type="hidden" name="qualRating" value="-1">
                     <input type="radio" name="qualRating" id="qualStar1" value="1">
                     <label for="qualStar1"></label>
                     <input type="radio" name="qualRating" id="qualStar2" value="2">
@@ -141,7 +149,7 @@
         
     </div>
 
-    <script> 
+    <!-- <script> 
         //This javascript handles the submission of all forms at once, upon the button click.
         document.getElementById('submitButton').addEventListener('click', function() {
             document.getElementById('availForm').submit();
@@ -149,7 +157,34 @@
             document.getElementById('aesthForm').submit();
             document.getElementById('qualForm').submit();
         });
-    </script>
+    </script> -->
 </div>
+
+<script>
+    document.getElementById('submitButton').addEventListener('click', function() {
+        
+        var formData = new FormData;
+        var formElements = document.querySelectorAll('form');
+        formElements.forEach(function(form) {
+            var formDataItem = new FormData(form);
+            for (var pair of formDataItem.entries()) {
+                // console.log(pair);
+                formData.append(pair[0], pair[1]);
+            }
+        });
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'submit.php', true)
+
+        xhr.onload = function() {
+            if(xhr.status === 200) {
+                console.log(xhr.responseText);
+            }
+        }
+
+        xhr.send(formData);
+    });
+</script>
+
 </body>
 </html>
