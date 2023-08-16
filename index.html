@@ -168,7 +168,7 @@
         formElements.forEach(function(form) {
             var formDataItem = new FormData(form);
             for (var pair of formDataItem.entries()) {
-                // console.log(pair);
+                console.log(pair);
                 formData.append(pair[0], pair[1]);
             }
         });
