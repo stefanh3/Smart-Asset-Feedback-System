@@ -19,6 +19,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             case 5:
                 $outputRating = 1;
                 break;
+            case -1:
+                $outputRating = -1;
+                break;
         }
         return $outputRating;
     }
@@ -59,23 +62,37 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $i++;
     }
 
-    echo "\n an array value: ". $combinedFormData[7]. "\n";
-
     // Unpacking the array into variables
-    $availRating = $combinedFormData[0];
-    $availComent = $combinedFormData[1];
-    $fitRating = $combinedFormData[2];
-    $fitComment = $combinedFormData[3];
-    $aesthRating = $combinedFormData[4];
-    $aesthComment = $combinedFormData[5];
-    $qualRating = $combinedFormData["qualRating"];
+    $availRating = processStarRating($combinedFormData["availRating"]);
+    $availComment = $combinedFormData["availComment"];
+    $fitRating = processStarRating($combinedFormData["fitRating"]);
+    $fitComment = $combinedFormData["fitComment"];
+    $aesthRating = processStarRating($combinedFormData["aesthRating"]);
+    $aesthComment = $combinedFormData["aesthComment"];
+    $qualRating = processStarRating($combinedFormData["qualRating"]);
     $qualComment = $combinedFormData["qualComment"];
 
     $query = "
-    INSERT INTO Rating (facilityID, qualityRating, qualityComment)
-    VALUES (1, {$qualRating}, \"{$qualComment}\");
-    ";
-
+    INSERT INTO Rating (
+        facilityID,
+        availabilityRating,
+        availabilityComment,
+        fitForPurposeRating,
+        fitForPurposeComment,
+        aestheticsRating,
+        aestheticsComment,
+        qualityRating,
+        qualityComment)
+    VALUES (1,
+        {$availRating},
+        \"{$availComment}\",
+        {$fitRating},
+        \"{$fitComment}\",
+        {$aesthRating},
+        \"{$aesthComment}\",
+        {$qualRating},
+        \"{$qualComment}\"
+    );";
     echo "<br>" . $query . "<br>";
 
     submitToDatabase($connnection, $query);

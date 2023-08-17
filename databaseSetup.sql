@@ -10,6 +10,7 @@ CREATE TABLE Facility (
 CREATE TABLE Rating (
     ratingID INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     facilityID INT(6) UNSIGNED,
+    time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     availabilityRating INT(1),
     availabilityComment MEDIUMTEXT,
     fitForPurposeRating INT(1),
