@@ -22,9 +22,14 @@ CREATE TABLE Rating (
     FOREIGN KEY(facilityID) REFERENCES Facility(facilityID)
 );
 
+USE AssetDB;
 INSERT INTO Facility (facilityName)
-VALUES ("Carnarvon Fascine");
+VALUES ("Brockman Park");
 
 USE AssetDB;
 INSERT INTO Rating (facilityID, qualityRating, qualityComment)
 VALUES (1, 5, This is the first entry into the database!);
+
+USE AssetDB;
+SELECT * FROM Facility;
+DELETE FROM Facility WHERE facilityID = 4;

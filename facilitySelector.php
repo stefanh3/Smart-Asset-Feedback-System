@@ -24,45 +24,50 @@
     </a>
 </nav>
 
-<?php
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
+<div class="container">
+    <h1 style="text-align: center; padding-top: 20px;">Select A Facility</h1>
 
-    // Create a database connection
-    $hostname = "localhost";
-    $username = "root";
-    $password = "root";
-    $databaseName = "AssetDB";
-    $connection = @new mysqli($hostname, $username, $password, $databaseName);
 
-    // Test the database connection
-    if($connection->connect_error) {
-        echo "Database Connection Error!";
-        echo "<br>";
-        echo "Error Number: " . $connection->connect_errno;
-        echo "<br>";
-        echo "Error: " . $connection->connect_error;
-        exit();
-    }
+    <?php
+        error_reporting(E_ALL);
+        ini_set('display_errors', 1);
 
-    $query = "SELECT facilityName FROM Facility";
-    $result = $connection->query($query);
+        // Create a database connection
+        $hostname = "localhost";
+        $username = "root";
+        $password = "root";
+        $databaseName = "AssetDB";
+        $connection = @new mysqli($hostname, $username, $password, $databaseName);
 
-    echo '<div class="card-columns">';
-    while ($row = $result->fetch_assoc()) {
-        // echo "Facility Name: " . $row["facilityName"] . "<br>";
-        echo '
-            <div class="card bg-primary">
-                <div class="card-body">
-                    <p class="card-text">'.$row["facilityName"].'</p>
-                </div>
-            </div>';
-    }
-    echo '</div>';
+        // Test the database connection
+        if($connection->connect_error) {
+            echo "Database Connection Error!";
+            echo "<br>";
+            echo "Error Number: " . $connection->connect_errno;
+            echo "<br>";
+            echo "Error: " . $connection->connect_error;
+            exit();
+        }
 
-    // Close the database connection
-    $connection->close();
-?>
+        $query = "SELECT facilityName FROM Facility";
+        $result = $connection->query($query);
+
+        echo '<div class="card-columns">';
+        while ($row = $result->fetch_assoc()) {
+            // echo "Facility Name: " . $row["facilityName"] . "<br>";
+            echo '
+                <div class="card text-white bg-primary">
+                    <div class="card-body">
+                        <p class="card-text">'.$row["facilityName"].'</p>
+                    </div>
+                </div>';
+        }
+        echo '</div>';
+
+        // Close the database connection
+        $connection->close();
+    ?>
+</div>
 
 </body>
 </html>

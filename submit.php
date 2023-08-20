@@ -71,6 +71,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $aesthComment = $combinedFormData["aesthComment"];
     $qualRating = processStarRating($combinedFormData["qualRating"]);
     $qualComment = $combinedFormData["qualComment"];
+    $facilityID = $combinedFormData["facilityID"];
 
     $query = "
     INSERT INTO Rating (
@@ -83,7 +84,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         aestheticsComment,
         qualityRating,
         qualityComment)
-    VALUES (1,
+    VALUES ({$facilityID},
         {$availRating},
         \"{$availComment}\",
         {$fitRating},
