@@ -49,20 +49,23 @@
             exit();
         }
 
-        $query = "SELECT facilityName FROM Facility";
+        $query = "SELECT * FROM Facility";
         $result = $connection->query($query);
 
-        echo '<div class="card-columns">';
+        // echo '<div class="card">';
         while ($row = $result->fetch_assoc()) {
             // echo "Facility Name: " . $row["facilityName"] . "<br>";
-            echo '
-                <div class="card text-white bg-primary">
-                    <div class="card-body">
-                        <p class="card-text">'.$row["facilityName"].'</p>
-                    </div>
-                </div>';
+            // echo "Facility ID: " . $row["facilityID"] . "<br>";
+            // echo '
+            //     <div class="card text-white bg-primary">
+            //         <div class="card-body">
+            //             <p class="card-text">'.$row["facilityName"].'</p>
+            //             <a href="index.php?facilityID='.$row["facilityID"].'" class=btn btn-primary stretched-link">
+            //         </div>
+            //     </div>';
+            echo '<a href="index.php?facilityID='.$row["facilityID"].'">'.$row["facilityName"].'</a><br>';
         }
-        echo '</div>';
+        // echo '</div>';
 
         // Close the database connection
         $connection->close();
